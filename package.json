@@ -1,0 +1,28 @@
+{
+  "name": "apod",
+  "version": "0.0.1",
+  "description": "Get the Astronomy Picture Of the Day",
+  "main": "lib/apod.js",
+  "author": "Andrew Stewart <andrew@stwrt.ca> (http://andrew.stwrt.ca)",
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stewart/apod.js"
+  },
+
+  "license": "MIT",
+
+  "devDependencies": {
+    "sinon-chai": "2.6.0",
+    "chai":       "1.10.0",
+    "mocha":      "2.1.0",
+    "sinon":      "1.12.2"
+  },
+
+  "dependencies": {
+    "cheerio": "0.18.0",
+    "ent": "2.0.0",
+    "lodash": "2.4.1",
+    "restler": "3.2.2"
+  }
+}
