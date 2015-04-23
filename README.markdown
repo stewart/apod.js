@@ -1,8 +1,10 @@
-# apod
+# apod.js
 
-A Node.JS module to let you grab any [Astronomy Picture Of the Day][apod].
+A small JS wrapper around [NASA's APOD API][api].
 
-[apod]: http://apod.nasa.gov/apod/astropix.html
+[api]: https://data.nasa.gov/developer/external/planetary/#apod
+
+To use this, you'll need an api.data.gov API key - you can request one here: https://data.nasa.gov/developer/external/planetary/#apply-for-an-api-key
 
 ## Installation
 
@@ -13,33 +15,47 @@ A Node.JS module to let you grab any [Astronomy Picture Of the Day][apod].
 ```javascript
 var apod = require("apod");
 
-var callback = function(err, data) {
-  // do cool things with APOD here
-};
+apod.apiKey = "YOUR_API_KEY";
 
-apod.latest(callback);
+function callback(err, data) {
+  // do cool stuff with APOD data here
+}
 
-// takes a String, a Date object, or Number Year/Month/Day as arguments
-apod.forDate(2015, 01, 02, callback);
-apod.forDate(new Date(), callback);
-apod.forDate("20150102", callback);
+// get today's APOD
+apod(callback);
 
+// APOD for December 31, 1999 (JS has 0-indexed months)
+apod(new Date(1999, 11, 31), callback);
+
+// the same
+apod(1999, 11, 31, callback);
+
+// once more, with feeling
+apod("December 31, 1999" callback);
+
+// get a random APOD
 apod.random(callback);
 ```
 
-All functions yield an object like the following:
+Assuming success, all methods trigger the callback with an object like the following, direct from NASA's API:
 
-```javascript
+```json
 {
-  image: "http://apod.nasa.gov/apod/image/1501/m16pillarsHSTvis1024.jpg",
-  full: "http://apod.nasa.gov/apod/image/1501/hs-2015-01m16pillarsHST.jpg",
-  title: "Hubble 25th Anniversary: Pillars of Creation",
-  explanation: " <a href=\"http://hubblesite.org/newscenter/archive/releases/2015/01/\">To celebrate 25 years</a> (1990-2015) of exploring the Universe from low Earth orbit [etc]",
-  url: "http://apod.nasa.gov/apod/ap150101.html"
+  "concept_tags": true,
+  "title": "The Millennium that Defined Earth",
+  "url": "http://apod.nasa.gov/apod/image/9912/earthrise_apollo8.jpg",
+  "explanation": "When the second millennium began, people generally knew that [...]",
+  "concepts": {"0": "Galaxy", "1": "Milky Way", "2": "Earth", "3": "Solar System", "4": "Universe", "5": "Sun", "6": "Planet", "7": "Gravitation"},
+  "date": "1999-12-31"
 }
 ```
 
-Although it should be noted that `#forDate` may return `null` if called with a date for which there is no picture.
+## Version History
+
+Version | Notes
+------- | -----
+0.1.0   | Interface change, use new NASA APOD API
+0.0.1   | Initial release
 
 ## License
 
