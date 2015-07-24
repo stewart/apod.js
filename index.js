@@ -1,7 +1,8 @@
 "use strict";
 
 var superagent = require("superagent");
-require("superagent-proxy")(superagent);
+
+var proxyConfigured = false;
 
 function quit(reason) {
   throw new Error(reason);
@@ -66,7 +67,12 @@ var apod = module.exports = function apod() {
     date.getDate()
   ].join("-");
 
-  var proxy = process.env.https_proxy;
+  var proxy = process.env.https_proxy || apod.proxy;
+
+  if (proxy && !proxyConfigured) {
+    proxyConfigured = true
+    require("superagent-proxy")(superagent);
+  }
 
   var req = superagent
     .get("https://api.data.gov/nasa/planetary/apod");
@@ -89,6 +95,7 @@ var apod = module.exports = function apod() {
 };
 
 apod.apiKey = null;
+apod.proxy = "";
 
 apod.random = function(callback) {
   if (!callback || typeof callback !== "function") {
