@@ -3,13 +3,16 @@
   "version": "0.1.0",
   "description": "Wrapper around NASA's APOD API",
   "author": "Andrew Stewart <andrew@stwrt.ca> (http://andrew.stwrt.ca)",
+
   "repository": {
     "type": "git",
     "url": "https://github.com/stewart/apod.js"
   },
+
   "license": "MIT",
+
   "dependencies": {
-    "superagent": "1.2.0",
+    "superagent": "^1.2.0",
     "superagent-proxy": "^1.0.0"
   }
 }
