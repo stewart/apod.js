@@ -1,6 +1,7 @@
 "use strict";
 
 var superagent = require("superagent");
+require("superagent-proxy")(superagent);
 
 function quit(reason) {
   throw new Error(reason);
@@ -40,7 +41,7 @@ function randomDate() {
       current.getFullYear(),
       current.getMonth() + 1,
       current.getDate()
-    ].join("-"))
+    ].join("-"));
 
     current.setDate(current.getDate() + 1);
   }
@@ -68,9 +69,16 @@ var apod = module.exports = function apod() {
     date.getDate()
   ].join("-");
 
-  superagent
-    .get("https://api.data.gov/nasa/planetary/apod")
-    .query({ concept_tags: "True", api_key: apod.apiKey, date: date })
+  var proxy = process.env.https_proxy;
+
+  var req = superagent
+    .get("https://api.data.gov/nasa/planetary/apod");
+
+  if (proxy) {
+    req = req.proxy(proxy);
+  }
+
+  req.query({ concept_tags: "True", api_key: apod.apiKey, date: date })
     .end(function(err, res) {
       var body = res.body;
 
@@ -81,7 +89,7 @@ var apod = module.exports = function apod() {
 
       callback(null, body);
     });
-}
+};
 
 apod.apiKey = null;
 

@@ -50,10 +50,14 @@ Assuming success, all methods trigger the callback with an object like the follo
 }
 ```
 
+## HTTPS Proxy
+Sending via an HTTP/HTTPS proxy is supported. Just set the environment variable `https_proxy` and it will be used when making requests to the API.
+
 ## Version History
 
 Version | Notes
 ------- | -----
+0.2.0   | Add support for HTTPS proxy.
 0.1.0   | Interface change, use new NASA APOD API
 0.0.1   | Initial release
 
