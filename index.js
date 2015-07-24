@@ -8,24 +8,21 @@ function quit(reason) {
 }
 
 function getDate(arr) {
-  if (arr.length) {
-    switch (typeof arr[0]) {
-      case "string":
-        return new Date(arr[0]);
+  if (!arr.length) { return new Date(); }
+  switch (typeof arr[0]) {
+    case "string":
+      return new Date(arr[0]);
 
-      case "number":
-        // this sucks, the alternatives are worse
-        return new Date(arr.join("-"));
+    case "number":
+      // this sucks, the alternatives are worse
+      return new Date(arr.join("-"));
 
-      default:
-        if (arr[0] instanceof Date) {
-          return arr[0];
-        }
+    default:
+      if (arr[0] instanceof Date) {
+        return arr[0];
+      }
 
-        quit("Unknown arguments provided to apod()");
-    }
-  } else {
-    return new Date();
+      quit("Unknown arguments provided to apod()");
   }
 }
 
