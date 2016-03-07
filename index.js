@@ -75,7 +75,7 @@ var apod = module.exports = function apod() {
     require("superagent-proxy")(superagent);
   }
 
-  var params = { concept_tags: "True", api_key: apod.apiKey, date: date },
+  var params = { api_key: apod.apiKey, date: date },
       req = superagent.get(endpoint).query(params);
 
   if (proxy) {
