@@ -2,7 +2,7 @@
 
 var superagent = require("superagent");
 
-var endpoint = "https://api.data.gov/nasa/planetary/apod",
+var endpoint = "https://api.nasa.gov/planetary/apod",
     proxyConfigured = false;
 
 function quit(reason) {
