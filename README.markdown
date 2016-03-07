@@ -69,6 +69,7 @@ apod.proxy = "https://my.secure.proxy"
 
 Version | Notes
 ------- | -----
+0.2.0   | Update endpoint URL, remove concept_tags
 0.2.0   | Add support for HTTPS proxy, refactors.
 0.1.0   | Interface change, use new NASA APOD API
 0.0.1   | Initial release
